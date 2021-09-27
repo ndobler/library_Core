@@ -29,15 +29,16 @@ public class BooksResourcesTest {
     @Test
     public void testAdd() {
 
-       Response response =given()
+       given()
                 .contentType("application/json")
                 .body("{\"id\":null,\"name\":\"La chica mecanica\",\"publicationYear\":2017}")
                 .when()
                 .post("/books/")
                 .then()
+                .statusCode(201)
+                .body(CoreMatchers.is("{\"id\":11,\"name\":\"La chica mecanica\",\"publicationYear\":2017}"));
 
-                .extract().response();
-        System.out.println(response.getBody().toString());
+
     }
 
 }

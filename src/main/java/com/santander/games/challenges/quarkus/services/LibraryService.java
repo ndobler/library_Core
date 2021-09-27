@@ -3,6 +3,8 @@ package com.santander.games.challenges.quarkus.services;
 import com.santander.games.challenges.quarkus.resources.BookDto;
 import com.santander.games.challenges.quarkus.mapper.BookMapper;
 import com.santander.games.challenges.quarkus.dao.Book;
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -13,6 +15,7 @@ import javax.transaction.Transactional;
 /**
  * Our service to register at the database
  */
+@Slf4j
 @ApplicationScoped
 public class LibraryService {
     /**
@@ -35,7 +38,12 @@ public class LibraryService {
     @Transactional
     public BookDto addBook(BookDto book) {
         Book be = bookMapper.dtoToEntity(book);
-        em.persist(be);
+        try {
+            em.persist(be);
+        } catch (Exception e) {
+            log.warn(e.getMessage());
+            return null;
+        }
         book.setId(be.getId());
         return book;
     }
