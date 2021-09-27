@@ -102,7 +102,7 @@ public class LibraryService {
      * @return List of books
      */
     public List<BookDto>  getBookBetweenYears(Integer lowerYear, Integer higherYear){
-        String betweenQuery = "publicationYear   BETWEEN ".concat(lowerYear+"")
+        String betweenQuery = "publicationYear BETWEEN ".concat(lowerYear+"")
                 .concat(" AND ").concat(higherYear+"");
         if(higherYear == null){
             betweenQuery = "publicationYear > "+ lowerYear;
