@@ -4,11 +4,13 @@ import com.santander.games.challenges.quarkus.resources.BookDto;
 import com.santander.games.challenges.quarkus.mapper.BookMapper;
 import com.santander.games.challenges.quarkus.dao.Book;
 import lombok.extern.slf4j.Slf4j;
+import org.jboss.resteasy.spi.UnhandledException;
 
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
@@ -38,6 +40,10 @@ public class LibraryService {
     @Transactional
     public BookDto addBook(BookDto book) {
         Book be = bookMapper.dtoToEntity(book);
+        BookDto exist = getBookByName(book.getName());
+        if(exist != null){
+            return exist;
+        }
         try {
             em.persist(be);
         } catch (Exception e) {
@@ -56,8 +62,13 @@ public class LibraryService {
     @Transactional
     public BookDto updateBook(BookDto book) {
         Book be = bookMapper.dtoToEntity(book);
-        em.persist(be);
-        return book;
+        try{
+            em.merge(be);
+        } catch (Exception e) {
+            log.warn(e.getMessage());
+            return null;
+        }
+        return bookMapper.entityToDto(be);
     }
 
     /**
@@ -117,8 +128,12 @@ public class LibraryService {
     public BookDto getBookByName(String name){
         Query query = em.createQuery("FROM Book where name= ?1");
         query.setParameter(1,name);
-
-        return bookMapper.entityToDto((Book)query.getSingleResult());
+        try {
+            return bookMapper.entityToDto((Book)query.getSingleResult());
+        } catch (Exception nre){
+            log.warn(nre.getMessage());
+            return null;
+        }
     }
 
     /**
@@ -128,16 +143,14 @@ public class LibraryService {
      * @return List of books
      */
     public List<BookDto>  getBookBetweenYears(Integer lowerYear, Integer higherYear){
-        String betweenQuery = "publicationYear BETWEEN ?1  AND ?1";
-        if(higherYear == null){
-            betweenQuery = "publicationYear > ?1";
-        }
-        Query query = em.createQuery("FROM Book " + betweenQuery +
-                "order by publicationYear");
+        Query query = em.createQuery("FROM Book where publicationYear BETWEEN ?1  AND ?2 " +
+                " order by publicationYear");
         query.setParameter(1,lowerYear);
         query.setParameter(2,higherYear);
 
+
         return bookMapper.entitiesToDtos(query.getResultList());
+
     }
 
 }

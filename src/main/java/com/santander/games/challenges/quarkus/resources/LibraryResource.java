@@ -3,7 +3,6 @@ package com.santander.games.challenges.quarkus.resources;
 
 import com.santander.games.challenges.quarkus.services.LibraryService;
 import java.net.HttpURLConnection;
-import java.net.http.HttpResponse;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -24,11 +23,18 @@ import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 @Path("/books")
 public class LibraryResource {
 
+    /**
+     * Inject Library Service
+     */
     @Inject
     LibraryService libraryService;
 
+    /**
+     * Add a new book
+     * @param book BookDto
+     * @return Response
+     */
     @POST
-
     public Response add(BookDto book) {
         BookDto bd =libraryService.addBook(book);
         if(bd == null){
@@ -37,9 +43,18 @@ public class LibraryResource {
         return Response.status(Response.Status.CREATED).entity(bd).build() ;
     }
 
+    /**
+     * Modify a book
+     * @param book BookDto
+     * @return BookDto
+     */
     @PUT
     public BookDto modify(BookDto book) {
-        return libraryService.updateBook(book);
+        BookDto bd =libraryService.updateBook(book);
+        if(bd == null){
+            throw new WebApplicationException(HttpURLConnection.HTTP_BAD_REQUEST);
+        }
+        return bd;
     }
 
     /**
@@ -86,14 +101,18 @@ public class LibraryResource {
     }
 
     /**
-     * Get book by id
-     * @param name Stengi
-     * @return Book
+     * Get book by name
+     * @param name String
+     * @return Response
      */
     @GET
     @Path("/byName/{name}")
-    public BookDto getByName(@PathParam("name") String name){
-            return libraryService.getBookByName(name);
+    public Response getByName(@PathParam("name") String name){
+        BookDto bookDto =libraryService.getBookByName(name);
+        if(bookDto == null){
+            return Response.status(Response.Status.NOT_FOUND).entity("Sorry").build();
+        }
+        return Response.status(Response.Status.OK).entity(bookDto).build();
     }
 
     /**
