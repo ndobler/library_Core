@@ -48,7 +48,7 @@ public class LibraryService {
      */
     @Transactional
     public List<BookDto> listOfBooks(int pageNumber, int numberelements) {
-        Query query = em.createQuery("FROM BOOK order by id");
+        Query query = em.createQuery("FROM Book order by id");
         query.setFirstResult((pageNumber-1)*numberelements);
         query.setMaxResults(numberelements);
         return bookMapper.entitiesToDtos(query.getResultList());
@@ -60,7 +60,7 @@ public class LibraryService {
      */
     @Transactional
     public List<BookDto> getAll() {
-        Query query = em.createQuery("FROM BOOK order by id");
+        Query query = em.createQuery("FROM Book order by id");
         return bookMapper.entitiesToDtos(query.getResultList());
     }
 
@@ -82,7 +82,10 @@ public class LibraryService {
      * @return BookDto
      */
     public BookDto getBookById(Integer id){
-        return bookMapper.entityToDto(Book.findById(id));
+        Query query = em.createQuery("FROM Book where id= ?1");
+        query.setParameter(1,id);
+
+        return bookMapper.entityToDto((Book)query.getSingleResult());
     }
 
     /**
@@ -92,7 +95,10 @@ public class LibraryService {
      *
      */
     public BookDto getBookByName(String name){
-        return bookMapper.entityToDto(Book.findByName(name));
+        Query query = em.createQuery("FROM Book where name= ?1");
+        query.setParameter(1,name);
+
+        return bookMapper.entityToDto((Book)query.getSingleResult());
     }
 
     /**
@@ -102,13 +108,15 @@ public class LibraryService {
      * @return List of books
      */
     public List<BookDto>  getBookBetweenYears(Integer lowerYear, Integer higherYear){
-        String betweenQuery = "publicationYear BETWEEN ".concat(lowerYear+"")
-                .concat(" AND ").concat(higherYear+"");
+        String betweenQuery = "publicationYear BETWEEN ?1  AND ?1";
         if(higherYear == null){
-            betweenQuery = "publicationYear > "+ lowerYear;
+            betweenQuery = "publicationYear > ?1";
         }
-        Query query = em.createQuery("FROM BOOK " + betweenQuery +
+        Query query = em.createQuery("FROM Book " + betweenQuery +
                 "order by publicationYear");
+        query.setParameter(1,lowerYear);
+        query.setParameter(2,higherYear);
+
         return bookMapper.entitiesToDtos(query.getResultList());
     }
 

@@ -1,39 +1,25 @@
 package com.santander.games.challenges.quarkus.dao;
 
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+
 import lombok.Getter;
 import lombok.Setter;
-
 @Getter
 @Setter
+@Table(name = Book.TABLE_NAME)
 @Entity
-public class Book extends PanacheEntity {
+public class Book {
+    public static final String TABLE_NAME= "BOOK";
+
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     public String name;
 
     public Integer publicationYear;
-
-    /**
-     * Find book by Id
-     * @param id Integer
-     * @return
-     */
-    public static Book findById(Integer id){
-        return find("id", id).firstResult();
-    }
-
-    /**
-     *  Find a book by name
-     * @param name String
-     * @return Book
-     */
-    public static Book findByName(String name){
-        return find("name", name).firstResult();
-    }
-
 }
+
+

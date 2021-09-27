@@ -3,6 +3,7 @@ package com.santander.games.challenges.quarkus.resources;
 
 import com.santander.games.challenges.quarkus.services.LibraryService;
 import java.net.HttpURLConnection;
+import java.net.http.HttpResponse;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -63,13 +64,18 @@ public class LibraryResource {
 
     /**
      * Get book by id
-     * @param id INteger
+     * @param id String
      * @return Book
      */
     @GET
     @Path("/book/{id}")
-    public BookDto get(@PathParam("id") Integer id){
-            return libraryService.getBookById(id);
+    public BookDto get(@PathParam("id") String id){
+        try {
+            Integer idInt =Integer.parseInt(id);
+            return libraryService.getBookById(idInt);
+        } catch (NumberFormatException ne) {
+            throw new WebApplicationException(HttpURLConnection.HTTP_BAD_REQUEST);
+        }
 
     }
 
@@ -85,16 +91,24 @@ public class LibraryResource {
     }
 
     /**
-     * Get book by id
-     * @param name Stengi
+     * Get books between publishing dates
+     * @param lowerYear String
+     * @param higherYear String
      * @return Book
      */
     @GET
     @Path("/byPublicationYearBetween/{lowerYear}/{higherYear}")
     public  List<BookDto> getByPublicationYearBetween(
-            @PathParam("lowerYear") Integer lowerYear,
-            @PathParam("higherYear") Integer higherYear){
-        return libraryService.getBookBetweenYears(lowerYear,higherYear);
+            @PathParam("lowerYear") String lowerYear,
+            @PathParam("higherYear") String higherYear){
+        try {
+            Integer lowerYearInt =Integer.parseInt(lowerYear);
+            Integer higherYearInt =Integer.parseInt(higherYear);
+            return libraryService.getBookBetweenYears(lowerYearInt,higherYearInt);
+        } catch (NumberFormatException ne) {
+            throw new WebApplicationException(HttpURLConnection.HTTP_BAD_REQUEST);
+        }
+
 
     }
 
