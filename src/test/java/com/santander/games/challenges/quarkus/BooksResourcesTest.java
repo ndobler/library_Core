@@ -1,19 +1,22 @@
 package com.santander.games.challenges.quarkus;
 
-import io.quarkus.test.junit.QuarkusTest;
+
+import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.h2.H2DatabaseTestResource;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
+import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 
-@QuarkusTest
+
+@QuarkusTestResource(H2DatabaseTestResource.class)
 public class BooksResourcesTest {
 
     @Test
-    public void testHelloEndpoint() {
+    public void testGet() {
         given()
                 .when().get("/books/book/1")
                 .then()
                 .statusCode(200)
-                .body("{}");
+                .body(CoreMatchers.is("{}"));
     }
 }
