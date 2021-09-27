@@ -33,7 +33,7 @@ public class LibraryResource {
 
     @PUT
     public BookDto modify(BookDto book) {
-        return null;
+        return libraryService.updateBook(book);
     }
 
     /**
@@ -41,7 +41,7 @@ public class LibraryResource {
      *
      * @param pageNumber Number of pages
      * @param maxNumber  max number
-     * @return list of kudos
+     * @return list of books
      */
     @GET
     @Path("/list")

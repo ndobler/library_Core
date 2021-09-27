@@ -28,7 +28,7 @@ public class LibraryService {
     BookMapper bookMapper;
 
     /**
-     * Add a new KudoCard
+     * Add a new Book
      * @param book
      * @return
      */
@@ -37,6 +37,18 @@ public class LibraryService {
         Book be = bookMapper.dtoToEntity(book);
         em.persist(be);
         book.setId(be.getId());
+        return book;
+    }
+
+    /**
+     * Update a Book
+     * @param book
+     * @return
+     */
+    @Transactional
+    public BookDto updateBook(BookDto book) {
+        Book be = bookMapper.dtoToEntity(book);
+        em.persist(be);
         return book;
     }
 
@@ -71,7 +83,7 @@ public class LibraryService {
      */
     @Transactional
     public void deleteBook(BookDto book){
-        Query q = em.createQuery("DELETE from kudo where id=?");
+        Query q = em.createQuery("DELETE from Book where id=?");
         q.setParameter(0,book.getId());
         q.executeUpdate();
     }
