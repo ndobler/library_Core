@@ -14,7 +14,7 @@ public class Book {
     public static final String TABLE_NAME= "BOOK";
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    //@GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     public String name;

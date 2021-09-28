@@ -1,3 +1,6 @@
+ALTER TABLE book DROP COLUMN id;
+ALTER TABLE book ADD COLUMN id SERIAL PRIMARY KEY;
+
 INSERT INTO book(name, publicationYear) VALUES ( 'Sapiens' , 2011);
 INSERT INTO book( name, publicationYear) VALUES ( 'Homo Deus' , 2015);
 INSERT INTO book( name, publicationYear) VALUES ( 'Enlightenment Now' , 2018);
