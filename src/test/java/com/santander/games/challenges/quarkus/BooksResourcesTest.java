@@ -65,7 +65,6 @@ public class BooksResourcesTest {
                 .statusCode(400);
 
 
-
     }
 
     @Test
@@ -103,6 +102,7 @@ public class BooksResourcesTest {
 
     @Test
     public void testModify(){
+
         given()
                 .when().get("/books/byName/La chica mecanica")
                 .then()
@@ -133,6 +133,40 @@ public class BooksResourcesTest {
                 .body(CoreMatchers.is("[{\"id\":7,\"name\":\"The culture map\",\"publicationYear\":2016},{\"id\":9,\"name\":\"The Handmaids Tale\",\"publicationYear\":2016},{\"id\":11,\"name\":\"La chica mecanica\",\"publicationYear\":2017},{\"id\":3,\"name\":\"Enlightenment Now\",\"publicationYear\":2018},{\"id\":4,\"name\":\"Factfulness\",\"publicationYear\":2018},{\"id\":10,\"name\":\"The Institue\",\"publicationYear\":2019}]"));
     }
 
+    @Test
+    void testDelete(){
+        given()
+                .contentType("application/json")
+                .body("{\"id\":null,\"name\":\"Así hablo Zaratrusta\",\"publicationYear\":1883}")
+                .when()
+                .post("/books/")
+                .then()
+                .statusCode(201)
+                .body(CoreMatchers.is("{\"id\":12,\"name\":\"Así hablo Zaratrusta\",\"publicationYear\":1883}"));
+
+        given()
+                .contentType("application/json")
+                .body("{\"id\":12,\"name\":\"Así hablo Zaratrusta\",\"publicationYear\":1883}")
+                .when()
+                .delete("/books/")
+                .then()
+                .statusCode(204);
+
+        given()
+                .when().get("/books/byName/Así hablo Zaratrusta")
+                .then()
+                .statusCode(404);
+
+        // must not fail
+        given()
+                .contentType("application/json")
+                .body("{\"id\":12,\"name\":\"Así hablo Zaratrusta\",\"publicationYear\":1883}")
+                .when()
+                .delete("/books/")
+                .then()
+                .statusCode(204);
+
+    }
 
 
 }

@@ -138,8 +138,13 @@ public class LibraryResource {
     }
 
 
+    /**
+     * Delete a book from the list
+     * @param book BookDto
+     */
     @DELETE
     public void delete(BookDto book) {
-       libraryService.deleteBook(book);
+
+        libraryService.deleteBook(book);
     }
 }

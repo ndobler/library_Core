@@ -102,8 +102,8 @@ public class LibraryService {
      */
     @Transactional
     public void deleteBook(BookDto book){
-        Query q = em.createQuery("DELETE from Book where id=?");
-        q.setParameter(0,book.getId());
+        Query q = em.createQuery("DELETE from Book where id=?1");
+        q.setParameter(1,book.getId());
         q.executeUpdate();
     }
 
