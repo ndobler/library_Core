@@ -19,6 +19,7 @@ public class BookMapper {
      */
     public Book dtoToEntity(BookDto book){
         Book be = new Book();
+        be.setId(book.getId());
         be.setName(book.getName());
         be.setPublicationYear(book.getPublicationYear());
         return be;

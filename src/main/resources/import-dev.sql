@@ -1,10 +1,13 @@
-INSERT INTO book(id, name, publicationYear) VALUES (1, 'Sapiens' , 2011);
-INSERT INTO book(id, name, publicationYear) VALUES (2, 'Homo Deus' , 2015);
-INSERT INTO book(id, name, publicationYear) VALUES (3, 'Enlightenment Now' , 2018);
-INSERT INTO book(id, name, publicationYear) VALUES (4, 'Factfulness' , 2018);
-INSERT INTO book(id, name, publicationYear) VALUES (5, 'Sleepwalkers' , 2012);
-INSERT INTO book(id, name, publicationYear) VALUES (6, 'The Silk Roads' , 2015);
-INSERT INTO book(id, name, publicationYear) VALUES (7, 'The culture map' , 2016);
-INSERT INTO book(id, name, publicationYear) VALUES (8, 'Billy Summers' , 2021);
-INSERT INTO book(id, name, publicationYear) VALUES (9, 'The Handmaids Tale' , 2016);
-INSERT INTO book(id, name, publicationYear) VALUES (10, 'The Institue' , 2019);
+ALTER TABLE book DROP COLUMN id;
+ALTER TABLE book ADD COLUMN id SERIAL PRIMARY KEY;
+
+INSERT INTO book(name, publicationYear) VALUES ( 'Sapiens' , 2011);
+INSERT INTO book( name, publicationYear) VALUES ( 'Homo Deus' , 2015);
+INSERT INTO book( name, publicationYear) VALUES ( 'Enlightenment Now' , 2018);
+INSERT INTO book(name, publicationYear) VALUES ( 'Factfulness' , 2018);
+INSERT INTO book(name, publicationYear) VALUES ( 'Sleepwalkers' , 2012);
+INSERT INTO book( name, publicationYear) VALUES ( 'The Silk Roads' , 2015);
+INSERT INTO book( name, publicationYear) VALUES ( 'The culture map' , 2016);
+INSERT INTO book( name, publicationYear) VALUES ( 'Billy Summers' , 2021);
+INSERT INTO book(name, publicationYear) VALUES ( 'The Handmaids Tale' , 2016);
+INSERT INTO book( name, publicationYear) VALUES ( 'The Institue' , 2019);
