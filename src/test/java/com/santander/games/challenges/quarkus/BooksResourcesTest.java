@@ -42,7 +42,7 @@ public class BooksResourcesTest {
                 .post("/books/")
                 .then()
                 .statusCode(201)
-                .body(CoreMatchers.is("{\"id\":11,\"name\":\"La chica mecanica\",\"publicationYear\":2017}"));
+                .body(CoreMatchers.is("{\"id\":100,\"name\":\"La chica mecanica\",\"publicationYear\":2017}"));
 
        //Must no duplicate or fail
         given()
@@ -52,7 +52,7 @@ public class BooksResourcesTest {
                 .post("/books/")
                 .then()
                 .statusCode(201)
-                .body(CoreMatchers.is("{\"id\":11,\"name\":\"La chica mecanica\",\"publicationYear\":2017}"));
+                .body(CoreMatchers.is("{\"id\":100,\"name\":\"La chica mecanica\",\"publicationYear\":2017}"));
 
 
         //Must no fail Bad Request
@@ -74,7 +74,7 @@ public class BooksResourcesTest {
                 .when().get("/books/all")
                 .then()
                 .statusCode(200)
-                .body(CoreMatchers.is("[{\"id\":1,\"name\":\"Sapiens\",\"publicationYear\":2011},{\"id\":2,\"name\":\"Homo Deus\",\"publicationYear\":2015},{\"id\":3,\"name\":\"Enlightenment Now\",\"publicationYear\":2018},{\"id\":4,\"name\":\"Factfulness\",\"publicationYear\":2018},{\"id\":5,\"name\":\"Sleepwalkers\",\"publicationYear\":2012},{\"id\":6,\"name\":\"The Silk Roads\",\"publicationYear\":2015},{\"id\":7,\"name\":\"The culture map\",\"publicationYear\":2016},{\"id\":8,\"name\":\"Billy Summers\",\"publicationYear\":2021},{\"id\":9,\"name\":\"The Handmaids Tale\",\"publicationYear\":2016},{\"id\":10,\"name\":\"The Institue\",\"publicationYear\":2019},{\"id\":11,\"name\":\"La chica mecanica\",\"publicationYear\":2017}]"));;
+                .body(CoreMatchers.is("[{\"id\":1,\"name\":\"Sapiens\",\"publicationYear\":2011},{\"id\":2,\"name\":\"Homo Deus\",\"publicationYear\":2015},{\"id\":3,\"name\":\"Enlightenment Now\",\"publicationYear\":2018},{\"id\":4,\"name\":\"Factfulness\",\"publicationYear\":2018},{\"id\":5,\"name\":\"Sleepwalkers\",\"publicationYear\":2012},{\"id\":6,\"name\":\"The Silk Roads\",\"publicationYear\":2015},{\"id\":7,\"name\":\"The culture map\",\"publicationYear\":2016},{\"id\":8,\"name\":\"Billy Summers\",\"publicationYear\":2021},{\"id\":9,\"name\":\"The Handmaids Tale\",\"publicationYear\":2016},{\"id\":10,\"name\":\"The Institue\",\"publicationYear\":2019},{\"id\":100,\"name\":\"La chica mecanica\",\"publicationYear\":2017}]"));;
 
     }
 
@@ -107,20 +107,20 @@ public class BooksResourcesTest {
                 .when().get("/books/byName/La chica mecanica")
                 .then()
                 .statusCode(200)
-                .body(CoreMatchers.is("{\"id\":11,\"name\":\"La chica mecanica\",\"publicationYear\":2017}"));
+                .body(CoreMatchers.is("{\"id\":100,\"name\":\"La chica mecanica\",\"publicationYear\":2017}"));
         given().contentType("application/json")
-                .body("{\"id\":11,\"name\":\"La chica mecanica\",\"publicationYear\":2019}")
+                .body("{\"id\":100,\"name\":\"La chica mecanica\",\"publicationYear\":2019}")
                 .when()
                 .put("/books/")
                 .then()
                 .statusCode(200)
-                .body(CoreMatchers.is("{\"id\":11,\"name\":\"La chica mecanica\",\"publicationYear\":2019}"));
+                .body(CoreMatchers.is("{\"id\":100,\"name\":\"La chica mecanica\",\"publicationYear\":2019}"));
 
         given()
                 .when().get("/books/byName/La chica mecanica")
                 .then()
                 .statusCode(200)
-                .body(CoreMatchers.is("{\"id\":11,\"name\":\"La chica mecanica\",\"publicationYear\":2019}"));
+                .body(CoreMatchers.is("{\"id\":100,\"name\":\"La chica mecanica\",\"publicationYear\":2019}"));
 
     }
 
@@ -130,7 +130,7 @@ public class BooksResourcesTest {
                 .when().get("/books/byPublicationYearBetween/2016/2020")
                 .then()
                 .statusCode(200)
-                .body(CoreMatchers.is("[{\"id\":7,\"name\":\"The culture map\",\"publicationYear\":2016},{\"id\":9,\"name\":\"The Handmaids Tale\",\"publicationYear\":2016},{\"id\":11,\"name\":\"La chica mecanica\",\"publicationYear\":2017},{\"id\":3,\"name\":\"Enlightenment Now\",\"publicationYear\":2018},{\"id\":4,\"name\":\"Factfulness\",\"publicationYear\":2018},{\"id\":10,\"name\":\"The Institue\",\"publicationYear\":2019}]"));
+                .body(CoreMatchers.is("[{\"id\":7,\"name\":\"The culture map\",\"publicationYear\":2016},{\"id\":9,\"name\":\"The Handmaids Tale\",\"publicationYear\":2016},{\"id\":100,\"name\":\"La chica mecanica\",\"publicationYear\":2017},{\"id\":3,\"name\":\"Enlightenment Now\",\"publicationYear\":2018},{\"id\":4,\"name\":\"Factfulness\",\"publicationYear\":2018},{\"id\":10,\"name\":\"The Institue\",\"publicationYear\":2019}]"));
     }
 
     @Test
@@ -142,11 +142,11 @@ public class BooksResourcesTest {
                 .post("/books/")
                 .then()
                 .statusCode(201)
-                .body(CoreMatchers.is("{\"id\":12,\"name\":\"Así hablo Zaratrusta\",\"publicationYear\":1883}"));
+                .body(CoreMatchers.is("{\"id\":101,\"name\":\"Así hablo Zaratrusta\",\"publicationYear\":1883}"));
 
         given()
                 .contentType("application/json")
-                .body("{\"id\":12,\"name\":\"Así hablo Zaratrusta\",\"publicationYear\":1883}")
+                .body("{\"id\":101,\"name\":\"Así hablo Zaratrusta\",\"publicationYear\":1883}")
                 .when()
                 .delete("/books/")
                 .then()
@@ -160,7 +160,7 @@ public class BooksResourcesTest {
         // must not fail
         given()
                 .contentType("application/json")
-                .body("{\"id\":12,\"name\":\"Así hablo Zaratrusta\",\"publicationYear\":1883}")
+                .body("{\"id\":101,\"name\":\"Así hablo Zaratrusta\",\"publicationYear\":1883}")
                 .when()
                 .delete("/books/")
                 .then()

@@ -15,6 +15,8 @@ public class Book {
 
     @Id
     //@GeneratedValue(strategy= GenerationType.IDENTITY)
+    @SequenceGenerator(name = "book_seq", sequenceName = "book_seq_1",initialValue = 100,   allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_seq")
     private Integer id;
 
     public String name;
