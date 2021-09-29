@@ -31,14 +31,15 @@ Json example:
         - List books paging passing parameters *pageNumber*(default 1) and  "maxNumber"(default 2)
 
 ### Build and deploy in Openshift
-https://quarkus.io/guides/deploying-to-openshift#build-and-deploy-in-a-single-step
-    mvn clean package -P native -Dquarkus.kubernetes.deploy=true
-    oc get is
-    oc get pods 
-    oc get svc
-    oc expose svc/library 
-    oc get routes  
-    curl http://<route>/library  
+https://quarkus.io/guides/deploying-to-openshift#build-and-deploy-in-a-single-step  
+
+    mvn clean package -P native -Dquarkus.kubernetes.deploy=true  
+    oc get is  
+    oc get pods   
+    oc get svc  
+    oc expose svc/library   
+    oc get routes    
+    curl http://<route>/library    
 
 ## Quarkus build info
 ### code-with-quarkus Project
