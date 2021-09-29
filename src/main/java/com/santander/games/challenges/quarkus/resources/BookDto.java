@@ -5,6 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
+/**
+ * DTO Book object
+ */
 public class BookDto {
 
     private Integer id;
