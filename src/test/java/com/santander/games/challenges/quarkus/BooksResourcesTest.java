@@ -145,10 +145,8 @@ public class BooksResourcesTest {
                 .body(CoreMatchers.is("{\"id\":101,\"name\":\"Así hablo Zaratrusta\",\"publicationYear\":1883}"));
 
         given()
-                .contentType("application/json")
-                .body("{\"id\":101,\"name\":\"Así hablo Zaratrusta\",\"publicationYear\":1883}")
                 .when()
-                .delete("/books/")
+                .delete("/books/book/101")
                 .then()
                 .statusCode(204);
 
@@ -160,11 +158,10 @@ public class BooksResourcesTest {
         // must not fail
         given()
                 .contentType("application/json")
-                .body("{\"id\":101,\"name\":\"Así hablo Zaratrusta\",\"publicationYear\":1883}")
                 .when()
-                .delete("/books/")
+                .delete("/books/101")
                 .then()
-                .statusCode(204);
+                .statusCode(404);
 
     }
 

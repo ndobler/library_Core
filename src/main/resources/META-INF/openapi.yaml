@@ -1,0 +1,177 @@
+---
+openapi: 3.0.3
+info:
+  title: librarycore API
+  version: 1.0.0-SNAPSHOT
+paths:
+  /books:
+    put:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookDto'
+            examples:
+              Book:
+                value:
+                  id: 100
+                  name: Fondation
+                  publicationYear: 1951
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDto'
+          description: OK
+      summary: Modify a Book
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookDto'
+            examples:
+              Book:
+                value:
+                  name: Fondation
+                  publicationYear: 1951
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Add a book
+  /books/all:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookDto'
+          description: OK
+      summary: List all books
+  /books/book/{id}:
+    get:
+      parameters:
+      - examples:
+          "8":
+            value: "8"
+        name: id
+        description: Id identifier of the book
+        schema:
+          type: string
+        in: path
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDto'
+          description: OK
+      summary: Searc book by id
+    delete:
+      parameters:
+      - examples:
+          "100":
+            value: "100"
+        name: id
+        description: Id of the book to be delete
+        in: path
+        required: true
+      responses:
+        "204":
+          description: |
+            Delete operation goes ok
+      summary: Delete a book by id
+  /books/byName/{name}:
+    get:
+      parameters:
+      - examples:
+          Fondation:
+            value: Fondation
+        name: name
+        description: Name of the book to be search
+        schema:
+          type: string
+        in: path
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Search book by name
+  /books/byPublicationYearBetween/{lowerYear}/{higherYear}:
+    get:
+      parameters:
+      - examples:
+          "2020":
+            value: "2020"
+        name: higherYear
+        description: High year
+        schema:
+          type: string
+        in: path
+        required: true
+      - examples:
+          "1970":
+            value: "1970"
+        name: lowerYear
+        description: Lower  year
+        schema:
+          type: string
+        in: path
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookDto'
+          description: OK
+      summary: Get Books betwween publishing dates
+  /books/list:
+    get:
+      parameters:
+      - name: maxNumber
+        description: Max number of books by page
+        schema:
+          format: int32
+          default: "5"
+          type: integer
+        in: query
+      - name: pageNumber
+        description: Page number
+        schema:
+          format: int32
+          default: "1"
+          type: integer
+        in: query
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookDto'
+          description: OK
+      summary: List a books in page mode
+components:
+  schemas:
+    BookDto:
+      type: object
+      properties:
+        id:
+          format: int32
+          type: integer
+        name:
+          type: string
+        publicationYear:
+          format: int32
+          type: integer

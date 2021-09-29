@@ -140,11 +140,16 @@ public class LibraryResource {
 
     /**
      * Delete a book from the list
-     * @param book BookDto
+     * @param bookId String
      */
     @DELETE
-    public void delete(BookDto book) {
-
-        libraryService.deleteBook(book);
+    @Path("/book/{id}")
+    public void delete(@PathParam("id") String  bookId) {
+        try {
+            Integer idInt =Integer.parseInt(bookId);
+            libraryService.deleteBook(idInt);
+        } catch (NumberFormatException ne) {
+            throw new WebApplicationException(HttpURLConnection.HTTP_BAD_REQUEST);
+        }
     }
 }
