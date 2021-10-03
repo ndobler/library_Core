@@ -165,13 +165,27 @@ paths:
 components:
   schemas:
     BookDto:
+      description: Very simple description of a Book
       type: object
       properties:
         id:
           format: int32
+          description: Book identification
           type: integer
         name:
+          description: Book name and author
           type: string
         publicationYear:
           format: int32
+          description: First publish year
           type: integer
+      example:
+        id: 3
+        name: "John Kennedy Toole: La conjura de los necios"
+        publicationYear: 1980
+  securitySchemes:
+    api-key:
+      type: apiKey
+      description: Use a 3scale API Key
+      name: api-key
+      in: header
