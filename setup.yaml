@@ -15,7 +15,7 @@ objects:
     strategy:
       type: "JenkinsPipeline"
       jenkinsPipelineStrategy:
-        jenkinsfilePath: 3scale-challenge/Jenkinsfile
+        jenkinsfilePath: library_core/Jenkinsfile
         env:
           - name: SECRET_NAME
             value: ${SECRET_NAME}
@@ -37,11 +37,11 @@ parameters:
 - name: SECRET_NAME
   value: 3scale-toolbox
 - name: NAMESPACE
-  value: api-lifecycle
+  value: user10
 - name: TARGET_INSTANCE
-  value: 3scale-saas
+  value: 3scale-onprem
 - name: GIT_REPO
-  value: https://github.com/ndobler/3scale-challenge.git
+  value: https://github.com/ndobler/library_Core.git
 - name: PUBLIC_STAGING_WILDCARD_DOMAIN
   required: false
 - name: PUBLIC_PRODUCTION_WILDCARD_DOMAIN
