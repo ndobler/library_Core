@@ -29,11 +29,11 @@ node() {
                    insecure: params.DISABLE_TLS_VALIDATION == "yes",
                    secretName: params.SECRET_NAME],
         service: [:],
-//        applications: [
-            //[ name: "my-test-app", description: "This is used for tests", plan: "test", account: params.DEVELOPER_ACCOUNT_ID ]
-        //],
+        applications: [
+            [ name: "my-test-app", description: "This is used for tests", plan: "test", account: "user10" ]
+        ],
         applicationPlans: [
-          [ systemName: "basic", name: "Test", defaultPlan: true, published: true ]
+          [ systemName: "test", name: "Test", defaultPlan: true, published: true ]
         ]
     )
 
