@@ -24,7 +24,7 @@ node() {
                        publicProductionWildcardDomain: params.PUBLIC_PRODUCTION_WILDCARD_DOMAIN != "" ? params.PUBLIC_PRODUCTION_WILDCARD_DOMAIN : null,
                        privateBaseUrl: params.PRIVATE_BASE_URL ],
         toolbox: [ openshiftProject: "user10",
-                   destination: params.TARGET_INSTANCE,
+                   destination: "3scale-onprem",
                    image: "quay.io/redhat/3scale-toolbox:master", // TODO: remove me once the final image is released
                    insecure: params.DISABLE_TLS_VALIDATION == "yes",
                    secretName: params.SECRET_NAME],
@@ -33,7 +33,7 @@ node() {
             [ name: "my-test-app", description: "This is used for tests", plan: "test", account: "user10" ]
         ],
         applicationPlans: [
-          [ systemName: "test", name: "Test", defaultPlan: true, published: true ]
+          [ systemName: "Basic", name: "Basic", defaultPlan: true, published: true ]
         ]
     )
 
