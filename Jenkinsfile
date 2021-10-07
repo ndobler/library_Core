@@ -24,7 +24,7 @@ node() {
         toolbox: [ openshiftProject: "user10",
                    destination: "3scale-onprem",
                    image: "quay.io/redhat/3scale-toolbox:v0.17.1", // TODO: remove me once the final image is released
-                   insecure: params.DISABLE_TLS_VALIDATION == "yes",
+                   insecure: "yes",
                    secretName: params.SECRET_NAME,
                    activeDeadlineSeconds: 300],
         service: [:],
