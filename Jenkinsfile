@@ -29,7 +29,7 @@ node() {
                    activeDeadlineSeconds: 300],
         service: [:],
         applications: [
-            [ name: "my-test-app", description: "This is used for tests", plan: "test", account: "user10" ]
+            [ name: "my-test-app", description: "This is used for tests", plan: "test", account: "Developer" ]
         ],
         applicationPlans: [
           [ systemName: "test", name: "test", defaultPlan: true, published: true ]
