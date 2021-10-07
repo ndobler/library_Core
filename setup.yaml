@@ -23,12 +23,8 @@ objects:
             value: ${NAMESPACE}
           - name: TARGET_INSTANCE
             value: ${TARGET_INSTANCE}
-          - name: PUBLIC_STAGING_WILDCARD_DOMAIN
-            value: ${PUBLIC_STAGING_WILDCARD_DOMAIN}
-          - name: PUBLIC_PRODUCTION_WILDCARD_DOMAIN
-            value: ${PUBLIC_PRODUCTION_WILDCARD_DOMAIN}
           - name: DEVELOPER_ACCOUNT_ID
-            value: ${DEVELOPER_ACCOUNT_ID}
+            value: ndobler
           - name: PRIVATE_BASE_URL
             value: ${PRIVATE_BASE_URL}
           - name: DISABLE_TLS_VALIDATION
@@ -42,10 +38,6 @@ parameters:
   value: 3scale-onprem
 - name: GIT_REPO
   value: https://github.com/ndobler/library_Core.git
-- name: PUBLIC_STAGING_WILDCARD_DOMAIN
-  required: false
-- name: PUBLIC_PRODUCTION_WILDCARD_DOMAIN
-  required: false
 - name: DEVELOPER_ACCOUNT_ID
   required: true
 - name: PRIVATE_BASE_URL
