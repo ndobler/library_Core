@@ -19,7 +19,7 @@ node() {
         openapi: [filename: "src/main/resources/META-INF/openapi.yaml"],
         environment: [ baseSystemName: "library_Core",
                        //publicBasePath: "/api/",
-                       environmentName: "prod",
+                       //environmentName: "prod",
                        privateBaseUrl: params.PRIVATE_BASE_URL ],
         toolbox: [ openshiftProject: "user10",
                    destination: "3scale-onprem",
