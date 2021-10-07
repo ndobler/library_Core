@@ -20,14 +20,13 @@ node() {
         environment: [ baseSystemName: "library_Core",
                        publicBasePath: "/api/",
                        environmentName: "prod",
-                       publicStagingWildcardDomain: params.PUBLIC_STAGING_WILDCARD_DOMAIN != "" ? params.PUBLIC_STAGING_WILDCARD_DOMAIN : null,
-                       publicProductionWildcardDomain: params.PUBLIC_PRODUCTION_WILDCARD_DOMAIN != "" ? params.PUBLIC_PRODUCTION_WILDCARD_DOMAIN : null,
                        privateBaseUrl: params.PRIVATE_BASE_URL ],
         toolbox: [ openshiftProject: "user10",
                    destination: "3scale-onprem",
                    image: "quay.io/redhat/3scale-toolbox:master", // TODO: remove me once the final image is released
                    insecure: params.DISABLE_TLS_VALIDATION == "yes",
-                   secretName: params.SECRET_NAME],
+                   secretName: params.SECRET_NAME,
+                   activeDeadlineSecond: 600],
         service: [:],
         applications: [
             [ name: "my-test-app", description: "This is used for tests", plan: "test", account: "user10" ]
