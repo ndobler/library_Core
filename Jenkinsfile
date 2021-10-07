@@ -17,7 +17,7 @@ node() {
     // Prepare
     service = toolbox.prepareThreescaleService(
         openapi: [filename: "src/main/resources/META-INF/openapi.yaml"],
-        environment: [ baseSystemName: "library_Core",
+        environment: [ baseSystemName: "books-library",
                        //publicBasePath: "/api/",
                        //environmentName: "prod",
                        privateBaseUrl: params.PRIVATE_BASE_URL ],
