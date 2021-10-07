@@ -18,8 +18,6 @@ node() {
     service = toolbox.prepareThreescaleService(
         openapi: [filename: "src/main/resources/META-INF/openapi.yaml"],
         environment: [ baseSystemName: "books-library",
-                       //publicBasePath: "/api/",
-                       //environmentName: "prod",
                        privateBaseUrl: params.PRIVATE_URL ],
         toolbox: [ openshiftProject: "user10",
                    destination: "3scale-onprem",
@@ -49,19 +47,6 @@ node() {
     // Create an Application
     service.applyApplication()
 
-    // Run integration tests
-    // To run the integration tests when using APIcast SaaS instances, we need
-    // to fetch the proxy definition to extract the staging public url
-    //def proxy = service.readProxy("sandbox")
-    //def userkey = service.applications[0].userkey
-    //echo userKey
-    
-    //sh """set -e
-    //echo "userkey is ${userkey}"
-    //curl -sfk -w "GetAll: %{http_code}\n" -o /dev/null ${proxy.sandbox_endpoint}/api/books/all -H 'api-key: ${userkey}'
-    //"""
-
-    // Promote to production
     service.promoteToProduction()
   }
 
