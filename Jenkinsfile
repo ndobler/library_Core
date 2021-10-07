@@ -20,7 +20,7 @@ node() {
         environment: [ baseSystemName: "books-library",
                        //publicBasePath: "/api/",
                        //environmentName: "prod",
-                       privateBaseUrl: params.PRIVATE_BASE_URL ],
+                       privateBaseUrl: params.PRIVATE_URL ],
         toolbox: [ openshiftProject: "user10",
                    destination: "3scale-onprem",
                    image: "quay.io/redhat/3scale-toolbox:v0.17.1", // TODO: remove me once the final image is released
