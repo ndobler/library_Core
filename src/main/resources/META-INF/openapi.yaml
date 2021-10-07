@@ -81,6 +81,8 @@ paths:
             value: "100"
         name: id
         description: Id of the book to be delete
+        schema:
+          type: integer
         in: path
         required: true
       responses:
