@@ -26,13 +26,13 @@ node() {
                    image: "quay.io/redhat/3scale-toolbox:master", // TODO: remove me once the final image is released
                    insecure: params.DISABLE_TLS_VALIDATION == "yes",
                    secretName: params.SECRET_NAME,
-                   activeDeadlineSeconds: 600],
+                   activeDeadlineSeconds: 300],
         service: [:],
         applications: [
             [ name: "my-test-app", description: "This is used for tests", plan: "test", account: "user10" ]
         ],
         applicationPlans: [
-          [ systemName: "Basic", name: "Basic", defaultPlan: true, published: true ]
+          [ systemName: "Test", name: "Test", defaultPlan: true, published: true ]
         ]
     )
 
