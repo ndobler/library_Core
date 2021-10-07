@@ -32,7 +32,7 @@ node() {
             [ name: "my-test-app", description: "This is used for tests", plan: "test", account: "user10" ]
         ],
         applicationPlans: [
-          [ systemName: "Test", name: "Test", defaultPlan: true, published: true ]
+          [ systemName: "test", name: "test", defaultPlan: true, published: true ]
         ]
     )
 
