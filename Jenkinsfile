@@ -19,7 +19,7 @@ node() {
         openapi: [filename: "src/main/resources/META-INF/openapi.yaml"],
         environment: [ baseSystemName: "library_Core",
                        //publicBasePath: "/api/",
-                       //environmentName: "prod",
+                       environmentName: "prod",
                        privateBaseUrl: params.PRIVATE_BASE_URL ],
         toolbox: [ openshiftProject: "user10",
                    destination: "3scale-onprem",
@@ -52,14 +52,12 @@ node() {
     // Run integration tests
     // To run the integration tests when using APIcast SaaS instances, we need
     // to fetch the proxy definition to extract the staging public url
-    def proxy = service.readProxy("sandbox")
+    //def proxy = service.readProxy("sandbox")
     def userkey = service.applications[0].userkey
     sh """set -e
     echo "Public Staging Base URL is ${proxy.sandbox_endpoint}"
     echo "userkey is ${userkey}"
-    curl -sfk -w "GetLocation: %{http_code}\n" -o /dev/null ${proxy.sandbox_endpoint}/api/location -H 'api-key: ${userkey}'
-    curl -sfk -w "GetTimeframe: %{http_code}\n" -o /dev/null ${proxy.sandbox_endpoint}/api/timeframe -H 'api-key: ${userkey}'
-    curl -sfk -w "GetParticipants: %{http_code}\n" -o /dev/null ${proxy.sandbox_endpoint}/api/participants -H 'api-key: ${userkey}'
+    curl -sfk -w "GetAll: %{http_code}\n" -o /dev/null ${proxy.sandbox_endpoint}/api/books/all -H 'api-key: ${userkey}'
     """
 
     // Promote to production
