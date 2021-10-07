@@ -38,6 +38,12 @@ Hemos configurado sus variables de esta forma:
 Notar que el backend está desplegado con user2, que es donde desarrollamos challenge #1
 Y ejecutado su build
 
+## Bonus
+
+Hemos desplegado la aplicacion nuevamente para hacer el bonus (por eso de no romperla y asegurarnos al menos una parte).
+
+Podeis encontrarla [aqui](https://github.com/ndobler/book-api-secure)
+
 	oc start-build library-code-pipeline -n user10
 
 Lo hemos ejecutado unas 150.000 veces con la ayuda de Mikel y la documentación hasta terminar de depurar los errores y discrepancias. Lo bueno fue que hemos empezado perdidos y ya están conectados muchos de los puntos!! Más adelante agregaríamos más entornos (aunque no en el mismo JF, tests automáticos, etc.)
