@@ -18,12 +18,12 @@ node() {
     service = toolbox.prepareThreescaleService(
         openapi: [filename: "src/main/resources/META-INF/openapi.yaml"],
         environment: [ baseSystemName: "library_Core",
-                       publicBasePath: "/api/",
-                       environmentName: "prod",
+                       //publicBasePath: "/api/",
+                       //environmentName: "prod",
                        privateBaseUrl: params.PRIVATE_BASE_URL ],
         toolbox: [ openshiftProject: "user10",
                    destination: "3scale-onprem",
-                   image: "quay.io/redhat/3scale-toolbox:master", // TODO: remove me once the final image is released
+                   image: "quay.io/redhat/3scale-toolbox:v0.17.1", // TODO: remove me once the final image is released
                    insecure: params.DISABLE_TLS_VALIDATION == "yes",
                    secretName: params.SECRET_NAME,
                    activeDeadlineSeconds: 300],
