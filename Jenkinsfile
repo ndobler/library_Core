@@ -55,7 +55,6 @@ node() {
     //def proxy = service.readProxy("sandbox")
     def userkey = service.applications[0].userkey
     sh """set -e
-    echo "Public Staging Base URL is ${proxy.sandbox_endpoint}"
     echo "userkey is ${userkey}"
     curl -sfk -w "GetAll: %{http_code}\n" -o /dev/null ${proxy.sandbox_endpoint}/api/books/all -H 'api-key: ${userkey}'
     """
