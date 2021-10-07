@@ -54,10 +54,12 @@ node() {
     // to fetch the proxy definition to extract the staging public url
     //def proxy = service.readProxy("sandbox")
     def userkey = service.applications[0].userkey
-    sh """set -e
-    echo "userkey is ${userkey}"
-    curl -sfk -w "GetAll: %{http_code}\n" -o /dev/null ${proxy.sandbox_endpoint}/api/books/all -H 'api-key: ${userkey}'
-    """
+    echo userKey
+    
+    //sh """set -e
+    //echo "userkey is ${userkey}"
+    //curl -sfk -w "GetAll: %{http_code}\n" -o /dev/null ${proxy.sandbox_endpoint}/api/books/all -H 'api-key: ${userkey}'
+    //"""
 
     // Promote to production
     service.promoteToProduction()
